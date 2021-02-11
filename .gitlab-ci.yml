@@ -1,0 +1,27 @@
+image: behdad222/android-sdk:4.1
+
+
+before_script:
+  - touch ./info.txt
+  - echo "Build date          $(date)"                >> ./info.txt
+  - echo "Git branch          ${CI_COMMIT_REF_NAME}"  >> ./info.txt
+  - echo "Git commit          ${CI_COMMIT_SHA}"       >> ./info.txt
+  - echo "Gitlab pipeline     ${CI_PIPELINE_ID}"      >> ./info.txt
+  - echo "Pipeline source     ${CI_PIPELINE_SOURCE}"  >> ./info.txt
+
+
+stages:
+  - Build
+
+
+build:
+  stage: Build
+
+  script:
+    - gradle app:assembleDebug
+    - mv ./app/build/outputs/apk/debug/* .
+
+  artifacts:
+    paths:
+      - ./*.apk
+      - ./info.txt
