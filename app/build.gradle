@@ -34,8 +34,8 @@ android {
 
 configurations {
     ktlint
+    detekt
 }
-
 
 dependencies {
 
@@ -49,6 +49,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     ktlint "com.pinterest:ktlint:0.40.0"
+    detekt 'io.gitlab.arturbosch.detekt:detekt-cli:1.15.0'
 }
 
 task ktlint(type: JavaExec, group: "verification") {
@@ -67,4 +68,14 @@ task ktlintFormat(type: JavaExec, group: "formatting") {
     main = "com.pinterest.ktlint.Main"
     classpath = configurations.ktlint
     args "-F", "src/**/*.kt"
+}
+
+task detekt(type: JavaExec) {
+    main = "io.gitlab.arturbosch.detekt.cli.Main"
+    classpath = configurations.detekt
+    def input = "$projectDir"
+    def config = "$projectDir/config/detekt.yml"
+    def exclude = ".*/build/.*,.*/resources/.*"
+    def params = [ '-i', input, '-c', config, '-ex', exclude]
+    args(params)
 }
