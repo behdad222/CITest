@@ -11,7 +11,25 @@ before_script:
 
 
 stages:
+  - StaticAnalysis
   - Build
+
+
+ktlint:
+  stage: StaticAnalysis
+
+  script:
+    - gradle ktlint
+
+  after_script:
+    - mv ./app/build/ktlint.xml .
+
+  artifacts:
+    paths:
+      - ./info.txt
+      - ./ktlint.xml
+
+    when: always
 
 
 build:
