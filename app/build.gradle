@@ -76,6 +76,7 @@ task detekt(type: JavaExec) {
     def input = "$projectDir"
     def config = "$projectDir/config/detekt.yml"
     def exclude = ".*/build/.*,.*/resources/.*"
-    def params = [ '-i', input, '-c', config, '-ex', exclude]
+    def report = "html:./build/detekt.html"
+    def params = [ '-i', input, '-c', config, '-ex', exclude, '-r', report]
     args(params)
 }
