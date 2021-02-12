@@ -49,6 +49,23 @@ detekt:
     when: always
 
 
+lint:
+  stage: StaticAnalysis
+
+  script:
+    - gradle lint
+
+  after_script:
+    - mv ./app/build/reports/lint-results.html .
+
+  artifacts:
+    paths:
+      - ./lint-results.html
+      - ./info.txt
+
+    when: always
+
+
 build:member:
   stage: Build
 
