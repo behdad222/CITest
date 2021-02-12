@@ -32,6 +32,23 @@ ktlint:
     when: always
 
 
+detekt:
+  stage: StaticAnalysis
+
+  script:
+    - gradle detekt
+
+  after_script:
+    - mv ./app/build/detekt.html .
+
+  artifacts:
+    paths:
+      - ./info.txt
+      - ./detekt.html
+
+    when: always
+
+
 build:
   stage: Build
 
