@@ -30,6 +30,18 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    flavorDimensions 'mode'
+    productFlavors {
+        member {
+            dimension 'mode'
+        }
+
+        admin {
+            dimension 'mode'
+            applicationIdSuffix '.admin'
+            versionNameSuffix '-admin'
+        }
+    }
 }
 
 configurations {
