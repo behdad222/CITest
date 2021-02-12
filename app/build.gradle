@@ -17,6 +17,15 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        debug {
+            storeFile file('./debug_keystore.jks')
+            storePassword '123123'
+            keyAlias = 'CiTest'
+            keyPassword '123123'
+        }
+    }
+
     buildTypes {
         debug {
             minifyEnabled false
@@ -31,14 +40,18 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
     flavorDimensions 'mode'
+
     productFlavors {
         member {
             dimension 'mode'
