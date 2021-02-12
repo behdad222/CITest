@@ -54,6 +54,8 @@ build:
 
   script:
     - gradle app:assembleDebug
+
+  after_script:
     - mv ./app/build/outputs/apk/debug/* .
 
   artifacts:
