@@ -49,14 +49,25 @@ detekt:
     when: always
 
 
-build:
+build:member:
   stage: Build
 
   script:
-    - gradle app:assembleDebug
+    - gradle app:assembleMemberDebug
+    - mv ./app/build/outputs/apk/member/debug/* .
 
-  after_script:
-    - mv ./app/build/outputs/apk/debug/* .
+  artifacts:
+    paths:
+      - ./*.apk
+      - ./info.txt
+
+
+build:admin:
+  stage: Build
+
+  script:
+    - gradle app:assembleAdminDebug
+    - mv ./app/build/outputs/apk/admin/debug/* .
 
   artifacts:
     paths:
