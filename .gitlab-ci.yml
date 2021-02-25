@@ -66,6 +66,23 @@ lint:
     when: always
 
 
+checkStyle:
+  stage: StaticAnalysis
+
+  script:
+    - gradle checkstyle
+
+  after_script:
+    - mv build/reports/checkstyle/checkstyle.html .
+
+  artifacts:
+    paths:
+      - ./checkstyle.html
+      - ./info.txt
+
+    when: always
+
+
 build:member:
   stage: Build
 
