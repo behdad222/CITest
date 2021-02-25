@@ -100,6 +100,23 @@ spotBugs:
     when: always
 
 
+pmd:
+  stage: StaticAnalysis
+
+  script:
+    - gradle pmd
+
+  after_script:
+    - mv ./app/build/reports/pmd/*.html .
+
+  artifacts:
+    paths:
+      - ./*.html
+      - ./info.txt
+
+    when: always
+
+
 build:member:
   stage: Build
 
