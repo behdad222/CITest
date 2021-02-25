@@ -83,6 +83,23 @@ checkStyle:
     when: always
 
 
+spotBugs:
+  stage: StaticAnalysis
+
+  script:
+    - gradle spotbugsMemberDebug
+
+  after_script:
+    - mv ./app/build/reports/spotbugs/*.html .
+
+  artifacts:
+    paths:
+      - ./*.html
+      - ./info.txt
+
+    when: always
+
+
 build:member:
   stage: Build
 
