@@ -1,7 +1,6 @@
 package com.example.citest;
 
 import android.util.Log;
-
 import androidx.annotation.NonNull;
 
 public class LogUtils {
@@ -28,7 +27,7 @@ public class LogUtils {
     }
 
     /**
-     * Don't use this when obfuscating class names!
+     * Don't use this when obfuscating class names.
      */
     private static String makeTag(Class cls) {
         return fixTag(cls.getSimpleName());
@@ -257,6 +256,10 @@ public class LogUtils {
                 break;
 
             case Log.ERROR:
+                Log.e(tag, message, cause);
+                break;
+
+            default:
                 Log.e(tag, message, cause);
                 break;
         }
