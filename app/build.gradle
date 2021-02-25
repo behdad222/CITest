@@ -2,7 +2,14 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'checkstyle'
+    id  'com.github.spotbugs' version '4.6.2' apply false
 }
+
+ext {
+    SpotBugsTask = com.github.spotbugs.snom.SpotBugsTask
+}
+
+apply from: "$rootDir/spotbugs.gradle"
 
 android {
     compileSdkVersion 30

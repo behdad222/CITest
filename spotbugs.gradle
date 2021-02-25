@@ -1,0 +1,16 @@
+apply plugin: "com.github.spotbugs"
+
+project.tasks.withType(SpotBugsTask) {
+    group 'Verification'
+    description 'Run Spotbugs on this project.'
+
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
+}
+
+spotbugs {
+    effort = 'max'
+    reportLevel = 'high'
+}
