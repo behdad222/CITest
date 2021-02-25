@@ -3,7 +3,9 @@ package com.example.citest;
 import android.util.Log;
 import androidx.annotation.NonNull;
 
-public class LogUtils {
+@SuppressWarnings("PMD")
+public final class LogUtils {
+
     private static final String LOG_PREFIX = "CI";
 
     private static final int LOG_PREFIX_LENGTH = LOG_PREFIX.length();
@@ -13,6 +15,9 @@ public class LogUtils {
     private static final int MAX_LOG_SIZE = 1000;
     // Since logging is disabled for release, we can set our logging level to DEBUG.
     private static final int LOG_LEVEL = Log.DEBUG;
+
+
+    private LogUtils() { }
 
     private static boolean isLoggingEnabled() {
         return BuildConfig.DEBUG;
@@ -211,11 +216,7 @@ public class LogUtils {
         }
 
 
-        if (LOG_LEVEL <= logLevel) {
-            return true;
-        }
-
-        return false;
+        return LOG_LEVEL <= logLevel;
     }
 
     private static void fixLog(boolean isProtected, int logLevel, String tag, String message) {
