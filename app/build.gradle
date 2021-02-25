@@ -2,7 +2,8 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'checkstyle'
-    id  'com.github.spotbugs' version '4.6.2' apply false
+    id 'com.github.spotbugs' version '4.6.2' apply false
+    id 'pmd'
 }
 
 ext {
@@ -153,4 +154,20 @@ task detekt(type: JavaExec) {
     def report = "html:./build/detekt.html"
     def params = [ '-i', input, '-c', config, '-ex', exclude, '-r', report]
     args(params)
+}
+
+
+task pmd(type: Pmd) {
+    description 'Run PMD'
+    group 'verification'
+    ruleSetFiles = files("./config/pmd.xml")
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
+
+    ignoreFailures = false
 }
