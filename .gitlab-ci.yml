@@ -73,7 +73,7 @@ checkStyle:
     - gradle checkstyle
 
   after_script:
-    - mv build/reports/checkstyle/checkstyle.html .
+    - mv ./app/build/reports/checkstyle/checkstyle.html .
 
   artifacts:
     paths:
