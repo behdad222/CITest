@@ -11,9 +11,23 @@ before_script:
 
 
 stages:
+  - AfterMerge
   - StaticAnalysis
   - Build
 
+
+updateReleaseNote:
+  stage: AfterMerge
+
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /^Merge branch .* into 'develop'/
+
+  script:
+    - MERGE_REQUESTS_ID=$(echo $CI_COMMIT_DESCRIPTION | awk -F '!' '/See merge request/{print $2}')
+    - MR_TITLE=$(curl https://gitlab.com/api/v4/projects/$CI_PROJECT_ID/merge_requests\?access_token\=$ACCESS_TOKEN\&iids\[\]\=$MERGE_REQUESTS_ID | jq '.[0]' | jq -r '.title') > releas.txt
+    - echo $MERGE_REQUESTS_ID
+    - echo $MR_TITLE
 
 ktlint:
   stage: StaticAnalysis
